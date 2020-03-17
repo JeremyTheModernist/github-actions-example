@@ -1,5 +1,9 @@
 const fs = require("fs");
 
+require("dotenv").config({ path: `${__dirname}/.env.development` });
+
+console.log(process.env);
+
 const obj = {
 	name: "John",
 	getName() {
@@ -8,5 +12,7 @@ const obj = {
 	}
 };
 
-fs.mkdirSync("pages");
-fs.writeFileSync("pages/name.js", JSON.stringify(obj), null);
+if (!fs.existsSync("pages")) {
+	fs.mkdirSync("pages");
+	fs.writeFileSync("pages/name.js", JSON.stringify(obj), null);
+}
